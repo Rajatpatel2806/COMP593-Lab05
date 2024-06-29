@@ -28,8 +28,12 @@ def get_pokemon_name():
     Returns:
         str: Pokemon name
     """
-    # TODO: Function body
-    return
+    # Function body
+    if len(sys.argv) < 2:
+        print("Error: Please provide a Pokemon name as a command line argument.")
+        sys.exit(1)
+    return sys.argv[1]
+
 
 def get_paste_data(pokemon_info):
     """Builds the title and body text for a PasteBin paste that lists a Pokemon's abilities.
@@ -40,9 +44,12 @@ def get_paste_data(pokemon_info):
     Returns:
         (str, str): Title and body text for the PasteBin paste
     """    
-    # TODO: Build the paste title
-    # TODO: Build the paste body text
-    return # (title, body_text)
+    # Build the paste title
+    # Build the paste body text
+    title = f"{pokemon_info['name']} Abilities"
+    abilities = [ability['ability']['name'] for ability in pokemon_info['abilities']]
+    body = "\n".join(abilities)
+    return (title, body)
 
 if __name__ == '__main__':
     main()
