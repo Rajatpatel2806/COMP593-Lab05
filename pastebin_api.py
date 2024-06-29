@@ -4,8 +4,8 @@ https://pastebin.com/doc_api
 '''
 import requests
 
-PASTEBIN_API_POST_URL = 'https://pastebin.com/api/api_post.php'
-API_DEV_KEY = 'Put your API key here'
+PASTEBIN_API_POST_URL = 'https://pastebin.com/doc_api'
+API_DEV_KEY = 'SnCHBKI3P6Bx-ehPdSQehW0JR43GyoQG'
 
 def post_new_paste(title, body_text, expiration='N', listed=True):
     """Posts a new paste to PasteBin
@@ -19,6 +19,18 @@ def post_new_paste(title, body_text, expiration='N', listed=True):
     Returns:
         str: URL of new paste, if successful. Otherwise None.
     """    
-    # TODO: Function body
+    # Function body
     # Note: This function will be written as a group 
-    return
+    data = {
+        'api_dev_key': API_DEV_KEY,
+        'api_option': 'paste',
+        'api_paste_code': body_text,
+        'api_paste_name': title,
+        'api_paste_expire_date': expiration,
+        'api_paste_private': '0' if listed else '1'
+    }
+    response = requests.post(PASTEBIN_API_POST_URL, data=data)
+    if response.status_code == 200:
+        return response.text
+    else:
+        return None
